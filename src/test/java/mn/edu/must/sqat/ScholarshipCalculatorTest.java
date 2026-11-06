@@ -141,4 +141,21 @@ class ScholarshipCalculatorTest {
     void scholarshipReturnsZeroBelowThree() {
         assertEquals(0, calculator.scholarship(2.9, 16, false));
     }
+
+
+    // ==========================================
+    // PART C - Loop Boundary Tests
+    // ==========================================
+
+    @Test
+    void gpaWithOneScoreReturnsFour() {
+        assertEquals(4.0,
+                calculator.gpa(new double[]{95}), 0.001);
+    }
+
+    @Test
+    void gpaWithMultipleScoresReturnsCorrectAverage() {
+        assertEquals(2.5,
+                calculator.gpa(new double[]{95, 85, 75, 65}), 0.001);
+    }
 }
