@@ -158,4 +158,43 @@ class ScholarshipCalculatorTest {
         assertEquals(2.5,
                 calculator.gpa(new double[]{95, 85, 75, 65}), 0.001);
     }
+
+        // ==========================================
+    // PART D - Boundary Value Tests
+    // ==========================================
+
+    @Test
+    void letterGradeAt60ShouldReturnD() {
+        assertEquals("D", calculator.letterGrade(60));
+    }
+
+    @Test
+    void letterGradeAt59Point99ShouldReturnF() {
+        assertEquals("F", calculator.letterGrade(59.99));
+    }
+
+    @Test
+    void letterGradeAt69Point99ShouldReturnD() {
+        assertEquals("D", calculator.letterGrade(69.99));
+    }
+
+    @Test
+    void letterGradeAt0ShouldReturnF() {
+        assertEquals("F", calculator.letterGrade(0));
+    }
+
+    @Test
+    void letterGradeAt100ShouldReturnA() {
+        assertEquals("A", calculator.letterGrade(100));
+    }
+
+    @Test
+    void letterGradeAt89Point99ShouldReturnB() {
+        assertEquals("B", calculator.letterGrade(89.99));
+    }
+
+    @Test
+    void letterGradeAt90ShouldReturnA() {
+        assertEquals("A", calculator.letterGrade(90));
+    }
 }
