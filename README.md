@@ -33,24 +33,24 @@ OpenJDK 64-Bit Server VM Homebrew (build 25.0.2, mixed mode, sharing)
 ### Maven хувилбар
 
 ```text
-Apache Maven 3.9.12
+Apache Maven 3.9.12 (848fbb4bf2d427b72bdb2471c22fced7ebd9a7a1)
 Maven home: /opt/homebrew/Cellar/maven/3.9.12/libexec
-Java version: 25.0.2
+Java version: 25.0.2, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home
 Default locale: en_US, platform encoding: UTF-8
 OS name: "mac os x", version: "27.0.1", arch: "aarch64", family: "mac"
 ```
 
 ### Ашигласан технологи
 
-- Java 25.0.2
-- Maven 3.9.12
-- JUnit Jupiter 5.10.2
-- JaCoCo 0.8.12
+- Java: OpenJDK 25.0.2
+- Maven: 3.9.12
+- JUnit Jupiter: 5.10.2
+- JaCoCo: 0.8.12
 - Git болон GitHub
 
 ## 4. A хэсэг — Happy Path Testing
 
-Эхний шатанд програмын хэвийн ажиллагааг шалгах 5 тест бичсэн.
+Эхний шатанд програмын хэвийн ажиллагааг шалгах 5 Happy Path тест бичсэн.
 
 | № | Тестийн нэр | Шалгасан үйлдэл |
 |---|---|---|
@@ -65,6 +65,7 @@ OS name: "mac os x", version: "27.0.1", arch: "aarch64", family: "mac"
 - Tests run: 5
 - Failures: 0
 - Errors: 0
+- Skipped: 0
 - Build: SUCCESS
 
 ### JaCoCo coverage
@@ -76,11 +77,38 @@ OS name: "mac os x", version: "27.0.1", arch: "aarch64", family: "mac"
 | Lines | 9 | 16 | 64% |
 | Methods | 0 | 4 | 100% |
 
-Эхний шатны тестүүд програмын үндсэн ажиллагааг шалгасан боловч бүх нөхцөл болон салбаруудыг хамарч чадаагүй.
+### JaCoCo тайлангийн өнгөний ажиглалт
 
-JaCoCo тайлан дээр шар өнгөөр харагдсан хэсгүүд нь нөхцөлийн зарим салбар бүрэн шалгагдаагүйг, улаан өнгө нь огт ажиллаагүй кодын хэсгүүд байгааг харуулсан.
+Эхний 5 тестийг ажиллуулсны дараа JaCoCo HTML тайлан дээр зарим мөр улаан, зарим мөр шар өнгөөр харагдсан.
+
+**Улаан өнгөөр харагдсан мөрүүд (код ажиллаагүй):**
+
+| Мөрийн дугаар | Кодын хэсгийн тайлбар |
+|---:|---|
+| 21 | Онооны алдаатай оролтод `IllegalArgumentException` шидэх |
+| 26–27 | D үнэлгээ болон F үнэлгээ буцаах |
+| 32 | GPA-ийн хоосон эсвэл null массивт exception шидэх |
+| 39–40 | GPA тооцооллын switch-ийн D болон default хэсэг |
+| 49 | Тэтгэлгийн алдаатай оролтод exception шидэх |
+| 54–55 | Тэтгэлгийн 70% болон 0% буцаах хэсгүүд |
+
+**Шар өнгөөр харагдсан мөрүүд (нөхцөлийн бүх салбар бүрэн шалгагдаагүй):**
+
+| Мөрийн дугаар | Кодын хэсгийн тайлбар |
+|---:|---|
+| 20 | `score < 0 || score > 100` онооны хязгаар шалгах нөхцөл |
+| 25 | `score >= 70` нөхцөл |
+| 31 | `scores == null || scores.length == 0` массив шалгах нөхцөл |
+| 36 | GPA тооцооллын switch-ийн салбарууд |
+| 48 | Тэтгэлгийн оролтын шалгалтын нөхцөл |
+| 51 | `hasViolation` сахилгын зөрчил шалгах нөхцөл |
+| 52 | `gpa >= 3.8 && credits >= 15` нөхцөл |
+| 53 | `gpa >= 3.4 && credits >= 12` нөхцөл |
+
+Эхний шатны тестүүд програмын үндсэн хэвийн ажиллагааг шалгасан боловч алдаатай оролт, нөхцөлийн эсрэг үр дүн болон бүх буцаах утгуудыг хамарч чадаагүй.
 
 **Хадгалсан үр дүн:**
+
 - `results/mvn-verify-A.txt`
 - `results/jacoco-A.csv`
 - `screenshots/jacoco-A.png`
@@ -232,15 +260,21 @@ if (score >= 60) return "D";
 
 https://github.com/Hirito572/lab09-jacoco
 
-Ажлын явцад дараах commit-уудыг үүсгэсэн:
+Төслийг Git болон GitHub ашиглан үе шаттай хөгжүүлж, ажлын явцыг commit-уудаар хадгалсан.
 
-| Commit | Тайлбар |
-|---|---|
-| `ae6eeca` | Happy path тестүүд нэмсэн |
-| `5b691dc` | JaCoCo эхний тайлангийн screenshot нэмсэн |
-| `0f82984` | Branch болон Line Coverage 100% болгосон |
-| `fa3cb90` | GPA loop boundary тестүүд нэмсэн |
-| `8d3bdf2` | 60 онооны D үнэлгээний алдааг зассан |
+### Commit түүх
+
+| Commit ID | Commit message | Тайлбар |
+|---|---|---|
+| `ae6eeca` | `test: add happy path tests for scholarship calculator` | A хэсгийн Happy Path тестүүд нэмсэн |
+| `5b691dc` | `docs: add initial JaCoCo coverage screenshot` | A хэсгийн JaCoCo screenshot нэмсэн |
+| `0f82984` | `test: achieve 100 percent JaCoCo line and branch coverage` | B хэсгийн branch болон line coverage-ийг 100% болгосон |
+| `fa3cb90` | `test: add GPA loop boundary tests` | C хэсгийн GPA loop boundary тестүүд нэмсэн |
+| `8d3bdf2` | `fix: correct D grade boundary at 60` | D хэсгийн зааг утгын тест болон 60 онооны алдааны засвар |
+| `053242d` | `docs: complete Lab09 README` | README баримтжуулалтыг нэмсэн |
+| `3f81a5b` | `docs: improve CFG branch test labels` | CFG диаграммын T/F ирмэгийн тестийн нэрсийг сайжруулсан |
+
+Repository нь Public тохиргоотой бөгөөд лабораторийн код, тест, JaCoCo тайлан, CFG диаграмм болон README файлыг агуулна.
 
 ## 9. Төслийн бүтэц
 
