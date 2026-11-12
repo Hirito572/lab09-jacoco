@@ -270,9 +270,11 @@ https://github.com/Hirito572/lab09-jacoco
 | `5b691dc` | `docs: add initial JaCoCo coverage screenshot` | A хэсгийн JaCoCo screenshot нэмсэн |
 | `0f82984` | `test: achieve 100 percent JaCoCo line and branch coverage` | B хэсгийн branch болон line coverage-ийг 100% болгосон |
 | `fa3cb90` | `test: add GPA loop boundary tests` | C хэсгийн GPA loop boundary тестүүд нэмсэн |
-| `8d3bdf2` | `fix: correct D grade boundary at 60` | D хэсгийн зааг утгын тест болон 60 онооны алдааны засвар |
-| `053242d` | `docs: complete Lab09 README` | README баримтжуулалтыг нэмсэн |
-| `3f81a5b` | `docs: improve CFG branch test labels` | CFG диаграммын T/F ирмэгийн тестийн нэрсийг сайжруулсан |
+| `898dc20` | `test: add boundary value tests` | D хэсгийн зааг утгын тестүүд болон алдаатай тестийн нотолгоо нэмсэн |
+| `181838b` | `fix: correct D grade boundary at 60` | D хэсгийн 60 онооны алдааг засаж, эцсийн JaCoCo үр дүнг хадгалсан |
+| `fb28de3` | `docs: complete Lab09 README` | README баримтжуулалтыг нэмсэн |
+| `5f9dbf5` | `docs: improve CFG branch test labels` | CFG диаграммын T/F ирмэгийн тестийн нэрсийг сайжруулсан |
+| `d280cf1` | `docs: improve README coverage and environment details` | README-ийн coverage болон орчны мэдээллийг сайжруулсан |
 
 Repository нь Public тохиргоотой бөгөөд лабораторийн код, тест, JaCoCo тайлан, CFG диаграмм болон README файлыг агуулна.
 
